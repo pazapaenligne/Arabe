@@ -34,6 +34,46 @@ body{
     margin-top:30px;
 }
 
+.shape1{
+    position:absolute;
+    width:260px;
+    height:260px;
+    background:#cddc39;
+    border-radius:50%;
+    bottom:-120px;
+    left:-80px;
+}
+
+.shape2{
+    position:absolute;
+    width:320px;
+    height:320px;
+    background:#ffc400;
+    border-radius:50%;
+    bottom:-140px;
+    right:-100px;
+}
+
+.shape3{
+    position:absolute;
+    width:180px;
+    height:180px;
+    background:#81d4e8;
+    border-radius:50%;
+    bottom:-90px;
+    right:120px;
+}
+
+.shape4{
+    position:absolute;
+    width:160px;
+    height:160px;
+    background:#efb0b0;
+    border-radius:50%;
+    bottom:-70px;
+    left:240px;
+}
+
 .content{
     position:relative;
     z-index:2;
@@ -109,6 +149,7 @@ body{
     cursor:pointer;
     font-family:'Amiri', serif;
     font-weight:bold;
+    margin-top:10px;
 }
 
 .feedback{
@@ -117,46 +158,6 @@ body{
     font-weight:bold;
     min-height:45px;
     color:#333;
-}
-
-.shape1{
-    position:absolute;
-    width:260px;
-    height:260px;
-    background:#cddc39;
-    border-radius:50%;
-    bottom:-120px;
-    left:-80px;
-}
-
-.shape2{
-    position:absolute;
-    width:320px;
-    height:320px;
-    background:#ffc400;
-    border-radius:50%;
-    bottom:-140px;
-    right:-100px;
-}
-
-.shape3{
-    position:absolute;
-    width:180px;
-    height:180px;
-    background:#81d4e8;
-    border-radius:50%;
-    bottom:-90px;
-    right:120px;
-}
-
-.shape4{
-    position:absolute;
-    width:160px;
-    height:160px;
-    background:#efb0b0;
-    border-radius:50%;
-    bottom:-70px;
-    left:240px;
 }
 
 @media(max-width:768px){
@@ -180,8 +181,8 @@ body{
     }
 
     .check-btn{
-        font-size:26px;
-        padding:10px 28px;
+        font-size:24px;
+        padding:10px 25px;
     }
 
     .feedback{
@@ -203,11 +204,17 @@ body{
 
     <div class="content">
 
-        <div class="title">أَيْنَ حَرْفُ م ؟</div>
+        <div class="title">
+            أَيْنَ حَرْفُ م ؟
+        </div>
 
-        <div class="subtitle">اِخْتَرِ الإِجَابَةَ الصَّحِيحَةَ</div>
+        <div class="subtitle">
+            اِخْتَرِ الإِجَابَةَ الصَّحِيحَةَ
+        </div>
 
-        <div class="word">قَلَمٌ</div>
+        <div class="word">
+            قَلَمٌ
+        </div>
 
         <div class="answers">
 
@@ -271,7 +278,9 @@ function checkAnswer(){
     }
 
     buttons.forEach(btn => {
+
         btn.classList.remove("correct","wrong");
+
     });
 
     if(selectedAnswer === "last"){
@@ -279,7 +288,9 @@ function checkAnswer(){
         buttons.forEach(btn => {
 
             if(btn.dataset.answer === "last"){
+
                 btn.classList.add("correct");
+
             }
 
         });
@@ -291,7 +302,9 @@ function checkAnswer(){
         buttons.forEach(btn => {
 
             if(btn.dataset.answer === selectedAnswer){
+
                 btn.classList.add("wrong");
+
             }
 
         });
