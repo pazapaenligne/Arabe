@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,15 +7,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap" rel="stylesheet">
 
 <style>
-
 body{
     margin:0;
-    padding:20px;
+    padding:0;
     background:#f2f2f2;
     display:flex;
     justify-content:center;
-    align-items:center;
-    min-height:100vh;
     font-family:'Amiri', serif;
     overflow:hidden;
 }
@@ -24,16 +20,14 @@ body{
 .game-box{
     position:relative;
     width:95%;
-    max-width:850px;
+    max-width:1150px;
     background:#fff2bf;
     border-radius:40px;
-    padding:40px 20px;
+    padding:25px 20px 35px;
     text-align:center;
     overflow:hidden;
     box-sizing:border-box;
 }
-
-/* formes décoratives */
 
 .shape1{
     position:absolute;
@@ -41,8 +35,8 @@ body{
     height:260px;
     background:#cddc39;
     border-radius:50%;
-    bottom:-120px;
-    left:-80px;
+    bottom:-140px;
+    left:-90px;
 }
 
 .shape2{
@@ -51,7 +45,7 @@ body{
     height:320px;
     background:#ffc400;
     border-radius:50%;
-    bottom:-140px;
+    bottom:-170px;
     right:-100px;
 }
 
@@ -61,21 +55,19 @@ body{
     height:180px;
     background:#81d4e8;
     border-radius:50%;
-    bottom:-90px;
-    right:120px;
+    bottom:-100px;
+    right:260px;
 }
 
 .shape4{
     position:absolute;
-    width:160px;
-    height:160px;
+    width:150px;
+    height:150px;
     background:#efb0b0;
     border-radius:50%;
-    bottom:-70px;
-    left:240px;
+    bottom:-85px;
+    left:380px;
 }
-
-/* contenu */
 
 .content{
     position:relative;
@@ -83,16 +75,16 @@ body{
 }
 
 .subtitle{
-    font-size:38px;
+    font-size:36px;
     color:#37a9c5;
-    margin-bottom:25px;
+    margin-bottom:10px;
     font-weight:bold;
 }
 
 .word{
-    font-size:85px;
+    font-size:70px;
     color:#333;
-    margin:25px 0 35px;
+    margin:5px 0 25px;
     font-family:Arial, sans-serif;
     font-weight:bold;
 }
@@ -100,27 +92,23 @@ body{
 .answers{
     display:flex;
     justify-content:center;
-    gap:18px;
+    gap:25px;
     flex-wrap:wrap;
-    margin-bottom:30px;
+    margin-bottom:25px;
 }
 
 .answer-btn{
     background:white;
     border:5px solid #cddc39;
     border-radius:25px;
-    padding:14px 28px;
+    padding:12px 35px;
     font-size:32px;
     cursor:pointer;
     transition:0.3s;
-    min-width:180px;
+    min-width:190px;
     font-family:'Amiri', serif;
     color:#333;
     font-weight:bold;
-}
-
-.answer-btn:hover{
-    transform:scale(1.05);
 }
 
 .answer-btn.selected{
@@ -144,64 +132,35 @@ body{
     color:white;
     border:none;
     border-radius:35px;
-    padding:14px 45px;
-    font-size:34px;
+    padding:10px 40px;
+    font-size:30px;
     cursor:pointer;
     font-family:'Amiri', serif;
     font-weight:bold;
-    transition:0.3s;
-}
-
-.check-btn:hover{
-    transform:scale(1.05);
 }
 
 .feedback{
-    margin-top:20px;
-    font-size:34px;
+    margin-top:12px;
+    font-size:28px;
     font-weight:bold;
-    min-height:45px;
+    min-height:35px;
     color:#333;
 }
 
-/* responsive */
-
 @media(max-width:768px){
-
-    .subtitle{
-        font-size:26px;
-    }
-
-    .word{
-        font-size:58px;
-    }
-
+    .subtitle{font-size:26px;}
+    .word{font-size:50px;}
     .answer-btn{
         font-size:22px;
-        min-width:130px;
-        padding:10px 16px;
+        min-width:120px;
+        padding:10px 15px;
     }
-
     .check-btn{
-        font-size:24px;
-        padding:10px 28px;
+        font-size:22px;
+        padding:8px 25px;
     }
-
-    .feedback{
-        font-size:24px;
-    }
-
-    .shape1{
-        width:180px;
-        height:180px;
-    }
-
-    .shape2{
-        width:220px;
-        height:220px;
-    }
+    .feedback{font-size:22px;}
 }
-
 </style>
 </head>
 
@@ -209,13 +168,11 @@ body{
 
 <div class="game-box">
 
-    <!-- formes décoratives -->
     <div class="shape1"></div>
     <div class="shape2"></div>
     <div class="shape3"></div>
     <div class="shape4"></div>
 
-    <!-- contenu -->
     <div class="content">
 
         <div class="subtitle">
@@ -253,27 +210,20 @@ body{
 </div>
 
 <script>
-
 let selectedAnswer = "";
 
 const buttons = document.querySelectorAll(".answer-btn");
 
 buttons.forEach(button => {
-
     button.addEventListener("click", () => {
-
         buttons.forEach(btn => {
             btn.classList.remove("selected","correct","wrong");
         });
 
         button.classList.add("selected");
-
         selectedAnswer = button.dataset.answer;
-
         document.getElementById("feedback").innerHTML = "";
-
     });
-
 });
 
 function checkAnswer(){
@@ -281,28 +231,20 @@ function checkAnswer(){
     const feedback = document.getElementById("feedback");
 
     if(selectedAnswer === ""){
-
         feedback.innerHTML = "⚠️ اِخْتَرْ إِجَابَةً";
-
         return;
     }
 
     buttons.forEach(btn => {
-
         btn.classList.remove("correct","wrong");
-
     });
 
     if(selectedAnswer === "first"){
 
         buttons.forEach(btn => {
-
             if(btn.dataset.answer === "first"){
-
                 btn.classList.add("correct");
-
             }
-
         });
 
         feedback.innerHTML = "✅ أَحْسَنْتَ";
@@ -310,20 +252,14 @@ function checkAnswer(){
     }else{
 
         buttons.forEach(btn => {
-
             if(btn.dataset.answer === selectedAnswer){
-
                 btn.classList.add("wrong");
-
             }
-
         });
 
         feedback.innerHTML = "❌ حَاوِلْ مَرَّةً أُخْرَى";
-
     }
 }
-
 </script>
 
 </body>
