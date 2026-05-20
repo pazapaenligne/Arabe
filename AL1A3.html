@@ -9,27 +9,20 @@
 <style>
 body{
     margin:0;
-    padding:25px;
-    background:#ffffff;
+    padding:0;
+    background:#f2f2f2;
     display:flex;
     justify-content:center;
     font-family:'Amiri', serif;
     overflow:hidden;
 }
 
-.frame{
-    width:95%;
-    max-width:1150px;
-    background:#eeeeee;
-    border-radius:40px;
-    padding:25px;
-    box-sizing:border-box;
-}
-
 .game-box{
     position:relative;
+    width:95%;
+    max-width:1150px;
     background:#fff2bf;
-    border-radius:35px;
+    border-radius:40px;
     padding:25px 20px 35px;
     text-align:center;
     overflow:hidden;
@@ -42,7 +35,7 @@ body{
     height:260px;
     background:#cddc39;
     border-radius:50%;
-    bottom:-145px;
+    bottom:-140px;
     left:-90px;
 }
 
@@ -62,7 +55,7 @@ body{
     height:180px;
     background:#81d4e8;
     border-radius:50%;
-    bottom:-105px;
+    bottom:-100px;
     right:260px;
 }
 
@@ -89,7 +82,7 @@ body{
 }
 
 .word{
-    font-size:80px;
+    font-size:72px;
     color:#333;
     margin:5px 0 25px;
     font-family:Arial, sans-serif;
@@ -99,19 +92,20 @@ body{
 .answers{
     display:flex;
     justify-content:center;
-    gap:35px;
+    gap:30px;
     flex-wrap:wrap;
     margin-bottom:25px;
 }
 
 .answer-btn{
-    width:180px;
-    height:150px;
-    background:#f7f7f7;
-    border:7px solid #cddc39;
-    border-radius:32px;
-    font-size:80px;
+    width:170px;
+    height:135px;
+    background:white;
+    border:6px solid #cddc39;
+    border-radius:30px;
+    font-size:72px;
     cursor:pointer;
+    transition:0.3s;
     font-family:'Amiri', serif;
     color:#333;
     font-weight:bold;
@@ -157,7 +151,6 @@ body{
 
 <body>
 
-<div class="frame">
 <div class="game-box">
 
     <div class="shape1"></div>
@@ -172,11 +165,9 @@ body{
         <div class="word">مَوْزٌ</div>
 
         <div class="answers">
-
             <button class="answer-btn" data-answer="ma">مَ</button>
             <button class="answer-btn" data-answer="mu">مُ</button>
             <button class="answer-btn" data-answer="mi">مِ</button>
-
         </div>
 
         <button class="check-btn" onclick="checkAnswer()">تَحَقَّقْ</button>
@@ -185,7 +176,6 @@ body{
 
     </div>
 
-</div>
 </div>
 
 <script>
@@ -205,7 +195,6 @@ buttons.forEach(button => {
 });
 
 function checkAnswer(){
-
     const feedback = document.getElementById("feedback");
 
     if(selectedAnswer === ""){
@@ -218,23 +207,18 @@ function checkAnswer(){
     });
 
     if(selectedAnswer === "ma"){
-
         buttons.forEach(btn => {
             if(btn.dataset.answer === "ma"){
                 btn.classList.add("correct");
             }
         });
-
         feedback.innerHTML = "✅ أَحْسَنْتَ";
-
     }else{
-
         buttons.forEach(btn => {
             if(btn.dataset.answer === selectedAnswer){
                 btn.classList.add("wrong");
             }
         });
-
         feedback.innerHTML = "❌ حَاوِلْ مَرَّةً أُخْرَى";
     }
 }
