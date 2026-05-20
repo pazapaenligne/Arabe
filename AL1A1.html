@@ -14,7 +14,7 @@
 body{
     margin:0;
     padding:20px;
-    background:#f3f3f3;
+    background:#f2f2f2;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -84,15 +84,22 @@ body{
     z-index:2;
 }
 
+.title{
+    font-size:58px;
+    color:#e91e63;
+    margin-bottom:10px;
+    font-weight:bold;
+}
+
 .subtitle{
-    font-size:40px;
+    font-size:38px;
     color:#37a9c5;
     margin-bottom:25px;
     font-weight:bold;
 }
 
 .word{
-    font-size:82px;
+    font-size:85px;
     color:#333;
     margin:25px 0 35px;
     font-family:Arial, sans-serif;
@@ -170,8 +177,12 @@ body{
 
 @media(max-width:768px){
 
+    .title{
+        font-size:38px;
+    }
+
     .subtitle{
-        font-size:28px;
+        font-size:26px;
     }
 
     .word{
@@ -179,13 +190,13 @@ body{
     }
 
     .answer-btn{
-        font-size:24px;
+        font-size:22px;
         min-width:130px;
         padding:10px 16px;
     }
 
     .check-btn{
-        font-size:26px;
+        font-size:24px;
         padding:10px 28px;
     }
 
@@ -211,7 +222,7 @@ body{
 
 <div class="game-box">
 
-    <!-- formes -->
+    <!-- formes décoratives -->
     <div class="shape1"></div>
     <div class="shape2"></div>
     <div class="shape3"></div>
@@ -219,6 +230,10 @@ body{
 
     <!-- contenu -->
     <div class="content">
+
+        <div class="title">
+            أَيْنَ حَرْفُ م ؟
+        </div>
 
         <div class="subtitle">
             اِخْتَرِ الإِجَابَةَ الصَّحِيحَةَ
