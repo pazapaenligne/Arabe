@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<title>بازابا — هَيَّا نَبْدَأْ</title>
+<title>بازابا — هَيَّا نَبْدَأْ / À la découverte</title>
 <style>
   @font-face {
     font-family: "Noto Sans Arabic";
@@ -404,15 +404,16 @@
     <div class="carte">
 
       <span class="etiquette">
-        <span class="etiquette-ar" lang="ar" dir="rtl">الأُسْبُوعُ ١ — المَسَارُ ١</span>
-        <span class="etiquette-fr" lang="fr" dir="ltr">Semaine 1 — Parcours 1</span>
+        <span class="etiquette-ar" lang="ar" dir="rtl">الأُسْبُوعُ 1 — الحِصَّةُ 1</span>
+        <span class="etiquette-fr" lang="fr" dir="ltr">Semaine 1 — Séance 1</span>
       </span>
 
       <h1>
-        <span class="titre-ar" lang="ar" dir="rtl">هَيَّا نَبْدَأْ!</span>
-        <span class="titre-fr" lang="fr" dir="ltr">On commence !</span>
+        <span class="titre-ar" lang="ar" dir="rtl">هَيَّا نَبْدَأْ</span>
+        <span class="titre-fr" lang="fr" dir="ltr">À la découverte</span>
       </h1>
 
+      <!-- ===== DÉBUT CONTENU VARIABLE — Semaine 1, Séance 1 ===== -->
       <div class="bloc-accueil" id="bloc-accueil">
         <div class="ligne-bilingue">
           <p class="ligne-ar" lang="ar" dir="rtl">مَرْحَبًا بِكَ فِي <strong>بَازَابَا</strong>!</p>
@@ -452,6 +453,55 @@
       <audio id="audio-accueil" preload="metadata">
         <source src="audio-accueil.mp3" type="audio/mpeg">
       </audio>
+
+      <!-- ===== FIN STRUCTURE FIXE DU TEMPLATE ===== -->
+
+      <!--
+        ==================================================
+        CONTENU VARIABLE DE LA SÉANCE — Semaine 1, Séance 1
+        ==================================================
+        Le bloc ci-dessus (accueil bilingue) est le contenu spécifique
+        de cette première séance. Il ne doit pas être dupliqué tel quel
+        dans les séances suivantes : chaque séance reçoit son propre
+        contenu, fourni par la progression / le guide enseignant / le manuel.
+
+        ==================================================
+        ZONES PÉDAGOGIQUES PRÉVUES PAR LE TEMPLATE (bouton 1 — هَيَّا نَبْدَأْ)
+        ==================================================
+        Aucun contenu pédagogique n'est inventé ici. Ces zones sont
+        documentées pour être activées séance par séance, dans le même
+        langage visuel que ci-dessus (bloc-accueil / ligne-bilingue /
+        ligne-ar + ligne-fr, lang/dir corrects), une fois le contenu
+        fourni par les sources (progression, manuel, guide enseignant).
+
+        A. OBJECTIF DU JOUR (une phrase courte, issue de la progression) :
+        <div class="bloc-accueil">
+          <div class="ligne-bilingue">
+            <p class="ligne-ar" lang="ar" dir="rtl">مَاذَا سَأَتَعَلَّمُ الْيَوْمَ؟</p>
+            <p class="ligne-fr" lang="fr" dir="ltr">Ce que je vais apprendre</p>
+          </div>
+          <div class="ligne-bilingue ligne-bilingue--accent">
+            <p class="ligne-ar" lang="ar" dir="rtl">[objectif de la séance — depuis la progression]</p>
+            <p class="ligne-fr" lang="fr" dir="ltr">[traduction correspondante]</p>
+          </div>
+        </div>
+
+        B. PETIT RAPPEL — optionnel, à insérer uniquement si un
+           apprentissage précédent est réellement nécessaire.
+           Absent pour Semaine 1 — Séance 1 (aucune séance précédente).
+           Doit pouvoir être totalement omis sans casser la mise en page.
+
+        C. MISE EN SITUATION — image / écoute / histoire / dialogue /
+           observation / devinette provenant du manuel ou du guide
+           enseignant, à insérer ici selon la séance.
+
+        D. CONSIGNE — une seule action principale, bilingue (arabe puis
+           français), selon la source pédagogique de la séance.
+
+        E. INTERACTION ÉVENTUELLE — uniquement si justifiée par la
+           source pédagogique, jamais ajoutée pour "spectaculariser"
+           la page.
+      -->
 
     </div>
   </main>
