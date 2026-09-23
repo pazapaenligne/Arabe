@@ -469,7 +469,39 @@
     font-size: 1.05rem;
     font-weight: 500;
     color: #57574F;
-    margin: 0 0 30px;
+    margin: 0 0 6px;
+  }
+
+  /* --- indication de l'étape suivante : informative, jamais cliquable --- */
+  .etape-suivante {
+    margin: 22px auto 0;
+    padding-top: 18px;
+    max-width: 420px;
+    border-top: 1px dashed rgba(54, 187, 214, 0.3);
+    opacity: 0;
+    transform: translateY(6px);
+    animation: etape-suivante-in 0.6s ease-out 0.35s forwards;
+  }
+
+  .etape-suivante-ar {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--pz-bleu);
+    margin: 0 0 3px;
+  }
+
+  .etape-suivante-fr {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--pz-bleu);
+    margin: 0;
+  }
+
+  @keyframes etape-suivante-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
   .ecran-final .btn-nav-ar {
@@ -892,6 +924,12 @@
     .final-pret-fr {
       font-size: 0.95rem;
     }
+    .etape-suivante-ar {
+      font-size: 0.98rem;
+    }
+    .etape-suivante-fr {
+      font-size: 0.85rem;
+    }
   }
 
   @media (max-width: 360px) {
@@ -940,6 +978,11 @@
     }
     .ecran-final.apparition {
       animation: none !important;
+    }
+    .etape-suivante {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
     }
   }
 </style>
@@ -1142,9 +1185,13 @@
           <span class="final-bravo-fr" lang="fr" dir="ltr">Bravo !</span>
         </p>
         <p class="final-pret">
-          <span class="final-pret-ar" lang="ar" dir="rtl">أَنْتَ مُسْتَعِدٌّ لِلْمُوَاصَلَةِ!</span>
-          <span class="final-pret-fr" lang="fr" dir="ltr">Tu es prêt à continuer !</span>
+          <span class="final-pret-ar" lang="ar" dir="rtl">أَنْتَ الآنَ مُسْتَعِدٌّ لِتَكْتَشِفَ وَتَتَعَلَّمَ!</span>
+          <span class="final-pret-fr" lang="fr" dir="ltr">Maintenant, tu es prêt à découvrir et à apprendre !</span>
         </p>
+        <div class="etape-suivante" aria-hidden="false">
+          <p class="etape-suivante-ar" lang="ar" dir="rtl">🔵 الخُطْوَةُ التَّالِيَةُ: هَيَّا نَكْتَشِفْ</p>
+          <p class="etape-suivante-fr" lang="fr" dir="ltr">Étape suivante : Apprenons ensemble</p>
+        </div>
       </div>
 
     </div>
