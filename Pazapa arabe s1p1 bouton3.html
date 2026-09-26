@@ -1497,8 +1497,8 @@
         <p class="titre-fr" lang="fr" dir="ltr">Bravo !</p>
 
         <div class="ligne-bilingue ligne-fin">
-          <p class="ligne-ar" lang="ar" dir="rtl">أَتْمَمْتَ أَنْشِطَةَ « هَيَّا نَتَدَرَّبْ ».</p>
-          <p class="ligne-fr" lang="fr" dir="ltr">Tu as terminé les activités « Et si on s'entraînait ? ».</p>
+          <p class="ligne-ar" lang="ar" dir="rtl">اِنْتَهَيْنَا مِنْ أَنْشِطَةِ «هَيَّا نَتَدَرَّبْ».</p>
+          <p class="ligne-fr" lang="fr" dir="ltr">Nous avons terminé les activités « Et si on s'entraînait ? ».</p>
         </div>
 
         <div class="ligne-bilingue ligne-fin">
@@ -1523,6 +1523,7 @@
   "use strict";
 
   var ahsantaJoue = { a1: false, a2: false, a3: false, a4: false };
+  var sonFinJoue = false;
 
   // ---- Audio partage : un seul son actif a la fois dans toute l'activite ----
   var audioActif = null;
@@ -1973,6 +1974,13 @@
     });
     document.body.classList.toggle("page1-actif", idPage === "carte-garde");
     window.scrollTo({ top: 0, behavior: "smooth" });
+    if (idPage === "carte-fin" && !sonFinJoue) {
+      sonFinJoue = true;
+      arreterAudioActif();
+      try { sonAhsanta.pause(); sonAhsanta.currentTime = 0; } catch (e) {}
+      var sonFin = new Audio("audio/Bouton3_Fin_Hayya_Natadarrab.mp3");
+      try { sonFin.play().catch(function () {}); } catch (e) {}
+    }
   }
 
   [
@@ -2028,6 +2036,7 @@
     document.getElementById("btn-suivant-a4").disabled = true;
     arreterAudioActif();
     reinitialiserSonsP16();
+    sonFinJoue = false;
 
     afficherPage("carte-garde");
   });
