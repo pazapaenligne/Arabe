@@ -1930,6 +1930,7 @@
     });
   });
 
+  var ahsantaJoue = {};
   var sonAhsanta = new Audio("audio/ahsanta.mp3");
   function jouerAhsanta() {
     arreterAudioActif();
@@ -2016,6 +2017,7 @@
 
       if (totalAssocies >= TOTAL_PAIRES) {
         document.getElementById("btn-suivant-a1").disabled = false;
+        if (!ahsantaJoue.a1) { jouerAhsanta(); ahsantaJoue.a1 = true; }
       }
     } else {
       var imgRatee = selectionImage, motRate = selectionMot;
@@ -2172,6 +2174,7 @@
       if (situationActuelle >= SITUATIONS_POS.length - 1) {
         DOTS_POS.forEach(function (dot) { dot.classList.add("b3-pos-fait"); });
         document.getElementById("btn-suivant-a2").disabled = false;
+        if (!ahsantaJoue.a2) { jouerAhsanta(); ahsantaJoue.a2 = true; }
       } else {
         setTimeout(function () {
           masquerFeedbackPos();
@@ -2261,6 +2264,7 @@
       if (situationVisActuelle >= SITUATIONS_VIS_EL.length - 1) {
         DOTS_VIS.forEach(function (dot) { dot.classList.add("b3-vis-fait"); });
         document.getElementById("btn-suivant-a3").disabled = false;
+        if (!ahsantaJoue.a3) { jouerAhsanta(); ahsantaJoue.a3 = true; }
       } else {
         setTimeout(function () {
           masquerFeedbackVis();
@@ -2351,6 +2355,7 @@
       if (situationEcouteActuelle >= SITUATIONS_ECOUTE_EL.length - 1) {
         DOTS_ECOUTE.forEach(function (dot) { dot.classList.add("b3-ecoute-fait"); });
         document.getElementById("btn-suivant-a4").disabled = false;
+        if (!ahsantaJoue.a4) { jouerAhsanta(); ahsantaJoue.a4 = true; }
       } else {
         setTimeout(function () {
           masquerFeedbackEcoute();
