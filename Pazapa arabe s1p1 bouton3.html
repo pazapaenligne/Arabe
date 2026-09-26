@@ -1795,9 +1795,9 @@
 
   function reponseA2(correct) {
     if (correct) {
-      feedbackA2.reussite();
       indexManche++;
       if (indexManche >= couleursPapillons.length) {
+        feedbackA2.reussite();
         if (!ahsantaJoue.a2) { jouerAhsanta(); ahsantaJoue.a2 = true; }
         document.getElementById("btn-suivant-a2").disabled = false;
       } else {
