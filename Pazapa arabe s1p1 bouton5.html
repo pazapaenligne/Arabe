@@ -1989,6 +1989,18 @@
   var feedbackA2 = creerFeedback("message-erreur-a2", "message-reussite-a2");
   var appariementA2 = creerAppariement("b4-appariement-a2", "b4-lignes-a2", feedbackA2, "btn-suivant-a2", "a2");
 
+  function melangerGrille(wrapId, tailleGroupe) {
+    var items = Array.prototype.slice.call(document.querySelectorAll("#" + wrapId + " .b4-appariement-item"));
+    if (items.length < 2) { return; }
+    var parent = items[0].parentNode;
+    var g1 = items.slice(0, tailleGroupe), g2 = items.slice(tailleGroupe);
+    for (var i = g1.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = g1[i]; g1[i] = g1[j]; g1[j] = t; }
+    for (var i = g2.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = g2[i]; g2[i] = g2[j]; g2[j] = t; }
+    g1.forEach(function(el) { parent.appendChild(el); });
+    g2.forEach(function(el) { parent.appendChild(el); });
+  }
+  melangerGrille("b4-appariement-a2", 4);
+
   window.addEventListener("resize", function () {
     redessinateurs.forEach(function (f) { f(); });
   });
@@ -2272,7 +2284,7 @@
   document.getElementById("btn-recommencer-tout").addEventListener("click", function () {
     [
       function () { reinitialiserA1(); },
-      function () { appariementA2.reset(); },
+      function () { appariementA2.reset(); melangerGrille("b4-appariement-a2", 4); },
       function () { reinitialiserA3(); },
       function () { reinitialiserA4(); }
     ].forEach(function (f) { try { f(); } catch (e) {} });

@@ -2142,6 +2142,7 @@
     });
 
     var paire = SITUATIONS_POS[index].getAttribute("data-paire").split(",");
+    if (Math.random() < 0.5) { var _t = paire[0]; paire[0] = paire[1]; paire[1] = _t; }
     btnOpt1.setAttribute("data-reponse", paire[0]);
     btnOpt2.setAttribute("data-reponse", paire[1]);
     btnOpt1.querySelector(".b3-pos-label").textContent = ETIQUETTES_POS[paire[0]];
