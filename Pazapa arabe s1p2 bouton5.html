@@ -2141,6 +2141,12 @@
     var liste = document.getElementById("b5-" + q.id + "-liste");
     if (!liste) { return; }
     var boutons = Array.prototype.slice.call(liste.querySelectorAll("[data-correct]"));
+    (function() {
+      if (boutons.length < 2) { return; }
+      var arr = boutons.slice();
+      for (var i=arr.length-1; i>0; i--) { var j=Math.floor(Math.random()*(i+1)); var t=arr[i]; arr[i]=arr[j]; arr[j]=t; }
+      arr.forEach(function(el) { liste.appendChild(el); });
+    })();
     var msgErreur = document.getElementById("msg-erreur-" + q.id);
     var btnSuiv = document.getElementById("btn-suiv-" + q.id);
     var btnPrec = document.getElementById("btn-prec-" + q.id);
@@ -2204,6 +2210,11 @@
       var btnSuiv = document.getElementById("btn-suiv-" + q.id);
       if (btnSuiv) { btnSuiv.disabled = true; }
       document.querySelectorAll('[id^="dot-b5-' + q.id + '-"]').forEach(function (d) { d.classList.remove("b3-pos-fait"); });
+      var arr = Array.prototype.slice.call(liste.querySelectorAll("[data-correct]"));
+      if (arr.length > 1) {
+        for (var i=arr.length-1; i>0; i--) { var j=Math.floor(Math.random()*(i+1)); var t=arr[i]; arr[i]=arr[j]; arr[j]=t; }
+        arr.forEach(function(el) { liste.appendChild(el); });
+      }
     });
     afficherPage("carte-garde");
   }

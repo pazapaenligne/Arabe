@@ -1989,6 +1989,16 @@
   var imagesEl = Array.prototype.slice.call(document.querySelectorAll(".b3-fam-image"));
   var motsEl = Array.prototype.slice.call(document.querySelectorAll(".b3-fam-mot"));
 
+  function melangerFamille() {
+    var imgs = imagesEl.slice(); var imgsP = imgs[0].parentNode;
+    for (var i = imgs.length-1; i>0; i--) { var j=Math.floor(Math.random()*(i+1)); var t=imgs[i]; imgs[i]=imgs[j]; imgs[j]=t; }
+    imgs.forEach(function(el) { imgsP.appendChild(el); });
+    var mots = motsEl.slice(); var motsP = mots[0].parentNode;
+    for (var i = mots.length-1; i>0; i--) { var j=Math.floor(Math.random()*(i+1)); var t=mots[i]; mots[i]=mots[j]; mots[j]=t; }
+    mots.forEach(function(el) { motsP.appendChild(el); });
+  }
+  melangerFamille();
+
   function deselectionnerTout() {
     if (selectionImage) { selectionImage.classList.remove("selectionnee"); selectionImage = null; }
     if (selectionMot) { selectionMot.classList.remove("selectionnee"); selectionMot = null; }
@@ -2077,6 +2087,7 @@
       btn.disabled = false;
       btn.classList.remove("associee", "selectionnee", "erreur-momentanee");
     });
+    melangerFamille();
     document.getElementById("btn-suivant-a1").disabled = true;
   }
 
@@ -2214,6 +2225,15 @@
   // avance automatique apres 700 ms en cas de succes ; retour au meme
   // etat en cas d'erreur, sans jamais reveler la bonne reponse.
   // ===================================================================
+  function melangerVis() {
+    document.querySelectorAll(".b3-vis-lettres").forEach(function(grp) {
+      var btns = Array.prototype.slice.call(grp.querySelectorAll(".b3-vis-lettre"));
+      for (var i=btns.length-1; i>0; i--) { var j=Math.floor(Math.random()*(i+1)); var t=btns[i]; btns[i]=btns[j]; btns[j]=t; }
+      btns.forEach(function(el) { grp.appendChild(el); });
+    });
+  }
+  melangerVis();
+
   var SITUATIONS_VIS_EL = Array.prototype.slice.call(document.querySelectorAll(".b3-vis-situation"));
   var DOTS_VIS = Array.prototype.slice.call(document.querySelectorAll(".b3-vis-dot"));
   var msgVisReussite = document.getElementById("msg-vis-reussite");
@@ -2291,6 +2311,7 @@
     situationVisVerrouillee = false;
     masquerFeedbackVis();
     arreterAudioActif();
+    melangerVis();
     afficherSituationVis(0);
     document.getElementById("btn-suivant-a3").disabled = true;
   }
@@ -2304,6 +2325,15 @@
   // apres 700 ms en cas de succes ; retour au meme etat en cas d'erreur,
   // sans jamais reveler la bonne reponse.
   // ===================================================================
+  function melangerEcoute() {
+    document.querySelectorAll(".b3-ecoute-images").forEach(function(grp) {
+      var btns = Array.prototype.slice.call(grp.querySelectorAll(".b3-ecoute-choix"));
+      for (var i=btns.length-1; i>0; i--) { var j=Math.floor(Math.random()*(i+1)); var t=btns[i]; btns[i]=btns[j]; btns[j]=t; }
+      btns.forEach(function(el) { grp.appendChild(el); });
+    });
+  }
+  melangerEcoute();
+
   var SITUATIONS_ECOUTE_EL = Array.prototype.slice.call(document.querySelectorAll(".b3-ecoute-situation"));
   var DOTS_ECOUTE = Array.prototype.slice.call(document.querySelectorAll(".b3-ecoute-dot"));
   var msgEcouteReussite = document.getElementById("msg-ecoute-reussite");
@@ -2383,6 +2413,7 @@
     situationEcouteVerrouillee = false;
     masquerFeedbackEcoute();
     arreterAudioActif();
+    melangerEcoute();
     afficherSituationEcoute(0);
     document.getElementById("btn-suivant-a4").disabled = true;
   }
