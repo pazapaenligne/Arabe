@@ -2225,6 +2225,7 @@
       // logique : "Essaie encore" sur un essai incorrect, "Bravo !"
       // uniquement quand TOUTES les paires de la page sont validées.
       var pairesComparaison = document.querySelectorAll(".paire-comparaison");
+      pairesComparaison.forEach(function (paire) { melangerElements(paire); });
       pairesComparaison.forEach(function (paire) {
         var pageEl = paire.closest(".carte");
         var items = paire.querySelectorAll(".item-comparaison");
@@ -2264,6 +2265,7 @@
           paire.querySelectorAll(".item-comparaison").forEach(function (item) {
             item.classList.remove("reponse-validee");
           });
+          melangerElements(paire);
           if (pageEl) { feedbackDe(pageEl.id).masquerTout(); }
         });
       });
