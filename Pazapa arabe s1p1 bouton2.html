@@ -162,7 +162,7 @@
 
   .logo-img {
     display: block;
-    height: 58px;
+    height: 30px;
     width: auto;
   }
 
@@ -914,24 +914,22 @@
     background: var(--pz-vert-clair);
     padding: 7px 18px;
     border-radius: 999px;
-    margin-block-end: 0;
   }
 
   .etiquette-ar {
     font-weight: 700;
-    font-size: 1.4rem;
-    line-height: 1.7;
+    font-size: 0.82rem;
     color: #5C6B12;
   }
 
   .etiquette-fr {
     font-weight: 500;
-    font-size: 1.15rem;
+    font-size: 0.8rem;
     color: #6C7A3E;
   }
 
   h1 {
-    margin: 0 0 12px;
+    margin: 0 0 22px;
   }
 
   /* Espacement titre → consigne, spécifique à la PAGE 2 (la page 1
@@ -943,20 +941,8 @@
   }
 
   /* --- Entrée de la PAGE 2 : plus compacte, plus légère --- */
-  #carte-page2 .logo-img {
-    height: 44px;
-  }
-
   #carte-page2 .etiquette {
     padding: 4px 12px;
-  }
-
-  #carte-page2 .etiquette-ar {
-    font-size: 1.4rem;
-  }
-
-  #carte-page2 .etiquette-fr {
-    font-size: 1.15rem;
   }
 
   #carte-page2 .entete-compact {
@@ -1010,14 +996,14 @@
   .titre-ar {
     display: block;
     font-size: 2.2rem;
-    line-height: 1.7;
+    line-height: 1.35;
     font-weight: 800;
     color: var(--pz-gris-fonce);
   }
 
   .titre-fr {
     display: block;
-    font-size: 1.35rem;
+    font-size: 1rem;
     line-height: 1.4;
     font-weight: 600;
     color: #57574F;
@@ -1034,7 +1020,7 @@
   }
 
   .ligne-ar {
-    font-size: 1.75rem;
+    font-size: 1.3rem;
     font-weight: 700;
     line-height: 1.7;
     color: var(--pz-gris-fonce);
@@ -1046,7 +1032,7 @@
   }
 
   .ligne-fr {
-    font-size: 1.25rem;
+    font-size: 0.92rem;
     font-weight: 500;
     line-height: 1.5;
     color: #57574F;
@@ -1055,15 +1041,19 @@
 
   .ligne-bilingue--accent .ligne-ar {
     color: var(--pz-bleu);
-    font-size: 1.75rem;
+    font-size: 1.3rem;
   }
 
   /* --- Page de clôture (fin du bouton 2) : carte simple et
      chaleureuse, réutilise les styles/tokens déjà existants
      (titre-ar/titre-fr, ligne-bilingue, couleurs Pazapa) --- */
   .carte-fin .contenu-fin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 46px 20px 24px;
     text-align: center;
-    padding: 18px 8px 6px;
   }
 
   .carte-fin .etoile-fin {
@@ -1332,6 +1322,9 @@
     .carte {
       padding: 18px 16px;
     }
+    .titre-ar {
+      font-size: 1.7rem;
+    }
     .bloc-mascotte-accueil {
       gap: 14px;
     }
@@ -1350,6 +1343,12 @@
     .carte {
       padding: 14px 12px;
       border-radius: 18px;
+    }
+    .titre-ar {
+      font-size: 1.5rem;
+    }
+    .titre-fr {
+      font-size: 0.92rem;
     }
     .ressource-item {
       padding: 9px 14px;
