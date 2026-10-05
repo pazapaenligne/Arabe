@@ -1629,6 +1629,11 @@
   /* Fin du chemin coloriée en bleu une fois le labyrinthe réussi. */
   #trace-arrivee { display: none; }
   .zone-labyrinthe.labyrinthe-reussi #trace-arrivee { display: inline; }
+
+/* === Conteneur bleu clair : hauteur naturelle (fond limité au contenu) === */
+html{background:linear-gradient(transparent,transparent);height:auto;min-height:0}
+body,body.page1-actif{min-height:0 !important;height:auto;padding-bottom:16px}
+body.page1-actif{align-items:flex-start}
 </style>
 </head>
 <body class="page1-actif">
