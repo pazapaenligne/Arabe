@@ -2269,6 +2269,8 @@
         }
       });
 
+      var delaiPlanifie = false;
+
       function surChangement() {
         if (ecranFinalAudio.hidden) {
           return;
@@ -2279,9 +2281,14 @@
         if (enteteFinal) {
           enteteFinal.hidden = false;
         }
-        // audio automatique
+        // audio automatique, une fois le fondu d'apparition terminé (~0,65 s)
         // (si le navigateur le refuse, le secours se met en place)
-        lancer();
+        if (delaiPlanifie) { return; }
+        delaiPlanifie = true;
+        setTimeout(function () {
+          delaiPlanifie = false;
+          if (!ecranFinalAudio.hidden) { lancer(); }
+        }, 650);
       }
 
       new MutationObserver(function () {
