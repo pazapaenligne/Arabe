@@ -2234,6 +2234,8 @@
   }
 
   var DELAI_AUDIO_GARDE_MS = 1800;
+  var DELAI_AUDIO_FIN_MS = 2000;
+  var minuteurFin = null;
   var minuteurGarde = null;
   function annulerGardeProgrammee() {
     if (minuteurGarde) { clearTimeout(minuteurGarde); minuteurGarde = null; }
@@ -2895,6 +2897,7 @@
 
   function afficherPage(idPage) {
     annulerGardeProgrammee();
+    if (minuteurFin) { clearTimeout(minuteurFin); minuteurFin = null; }
     chainePages.forEach(function (id) {
       var carte = document.getElementById(id);
       if (!carte) { return; }
@@ -2903,15 +2906,14 @@
     document.body.classList.toggle("page1-actif", idPage === "carte-garde");
     window.scrollTo({ top: 0, behavior: "smooth" });
     if (idPage === "carte-fin") {
-      // L'audio de fin demarre seulement une fois la page finale affichee
-      // (apres le rendu et le retour en haut), pas avant.
+      // La page finale s'affiche d'abord entierement ; l'audio demarre seul
+      // environ 2 secondes plus tard (aucun clic requis).
       arreterAudioActif();
-      requestAnimationFrame(function () {
-        setTimeout(function () {
-          var cf = document.getElementById("carte-fin");
-          if (cf && !cf.classList.contains("page-masquee")) { jouerAudioUnique(AUDIO_BULLE_FIN); }
-        }, 2000);
-      });
+      minuteurFin = setTimeout(function () {
+        minuteurFin = null;
+        var cf = document.getElementById("carte-fin");
+        if (cf && !cf.classList.contains("page-masquee")) { jouerAudioUnique(AUDIO_BULLE_FIN); }
+      }, DELAI_AUDIO_FIN_MS);
     }
     if (idPage === "carte-garde") {
       // Court delai avant le lancement automatique : la page est d'abord
