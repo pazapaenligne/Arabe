@@ -2737,7 +2737,7 @@
       document.addEventListener("pointerdown", geste, true);
       document.addEventListener("keydown", geste, true);
     }
-    lancer();
+    setTimeout(lancer, 2000);
   }
 
   var chainePages = ["carte-garde", "carte-jeu1", "carte-jeu2", "carte-jeu3", "carte-fin"];
@@ -2819,7 +2819,7 @@
     // disponible ensuite pour une réécoute volontaire (même système jouerAudioUnique).
     arreterAudioActif();
     afficherPage("carte-fin");
-    jouerAudioUnique(FIN_AUDIO_SRC);
+    setTimeout(function () { jouerAudioUnique(FIN_AUDIO_SRC); }, 2000);
   });
 
   // Page de fin : Recommencer = réinitialise les 3 jeux et revient au début du parcours du Bouton 4

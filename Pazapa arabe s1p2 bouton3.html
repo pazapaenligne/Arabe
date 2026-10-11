@@ -2861,11 +2861,11 @@
         setTimeout(function () {
           var cf = document.getElementById("carte-fin");
           if (cf && !cf.classList.contains("page-masquee")) { jouerAudioUnique(AUDIO_BULLE_FIN); }
-        }, 900);
+        }, 2000);
       });
     }
     if (idPage === "carte-garde") {
-      jouerGarde();
+      setTimeout(jouerGarde, 2000);
     }
   }
 

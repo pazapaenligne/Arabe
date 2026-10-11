@@ -2109,7 +2109,7 @@
     document.body.classList.toggle("page1-actif", idPage === "carte-garde");
     window.scrollTo({ top: 0, behavior: "smooth" });
     if (idPage === "carte-garde" && !sansAudioGarde) {
-      jouerGarde();
+      setTimeout(jouerGarde, 2000);
     }
     if (idPage === "carte-fin" && !sonFinJoue) {
       sonFinJoue = true;
@@ -2122,7 +2122,7 @@
           if (cf && !cf.classList.contains("page-masquee")) {
             try { sonFin.play().catch(function () {}); } catch (e) {}
           }
-        }, 900);
+        }, 2000);
       });
     }
   }

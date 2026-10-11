@@ -2186,16 +2186,16 @@
       }
 
       // Tentative de lecture automatique dès que la page est prête.
-      lancer();
+      setTimeout(lancer, 2000);
 
       // Nouvelles tentatives automatiques (sans action de l'enfant) si la 1re a été
       // refusée trop tôt : fin de chargement, audio prêt, page rendue visible.
       // « lancer() » ne fait rien si l'audio joue déjà ou a déjà été joué : jamais deux fois.
-      audioIntro.addEventListener("canplaythrough", lancer);
-      window.addEventListener("load", lancer);
-      window.addEventListener("pageshow", lancer);
+      audioIntro.addEventListener("canplaythrough", function () { setTimeout(lancer, 2000); });
+      window.addEventListener("load", function () { setTimeout(lancer, 2000); });
+      window.addEventListener("pageshow", function () { setTimeout(lancer, 2000); });
       document.addEventListener("visibilitychange", function () {
-        if (!document.hidden) { lancer(); }
+        if (!document.hidden) { setTimeout(lancer, 2000); }
       });
     })();
   </script>
@@ -2288,7 +2288,7 @@
         setTimeout(function () {
           delaiPlanifie = false;
           if (!ecranFinalAudio.hidden) { lancer(); }
-        }, 650);
+        }, 2000);
       }
 
       new MutationObserver(function () {
