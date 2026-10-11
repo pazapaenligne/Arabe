@@ -2233,6 +2233,20 @@
     } catch (e) { gardeEnAttente = true; }
   }
 
+  var DELAI_AUDIO_GARDE_MS = 1800;
+  var minuteurGarde = null;
+  function annulerGardeProgrammee() {
+    if (minuteurGarde) { clearTimeout(minuteurGarde); minuteurGarde = null; }
+  }
+  function programmerGarde() {
+    annulerGardeProgrammee();
+    minuteurGarde = setTimeout(function () {
+      minuteurGarde = null;
+      var cg = document.getElementById("carte-garde");
+      if (cg && !cg.classList.contains("page-masquee")) { jouerGarde(); }
+    }, DELAI_AUDIO_GARDE_MS);
+  }
+
   function jouerAudioUnique(src) {
     arreterAudioActif();
     try {
@@ -2880,6 +2894,7 @@
   var chainePages = ["carte-garde", "carte-a1", "carte-a4", "carte-a2", "carte-a3", "carte-fin"];
 
   function afficherPage(idPage) {
+    annulerGardeProgrammee();
     chainePages.forEach(function (id) {
       var carte = document.getElementById(id);
       if (!carte) { return; }
@@ -2891,7 +2906,10 @@
       jouerAudioUnique(AUDIO_BULLE_FIN);
     }
     if (idPage === "carte-garde") {
-      jouerGarde();
+      // Court delai avant le lancement automatique : la page est d'abord
+      // entierement visible, l'enfant peut l'observer, puis l'audio demarre
+      // seul (aucun clic requis).
+      programmerGarde();
     }
   }
 
@@ -2901,7 +2919,7 @@
     if (evt.target.closest && evt.target.closest("#btn-demarrer")) { return; }
     if (gardeEnAttente) { jouerGarde(); }
   });
-  carteGardeEl.querySelector("h1").addEventListener("click", function () { jouerGarde(); });
+  carteGardeEl.querySelector("h1").addEventListener("click", function () { annulerGardeProgrammee(); jouerGarde(); });
 
   // Clic sur "هَيَّا نَبْدَأْ / C'est parti !" : ouverture directe de l'Activite 1,
   // sans audio (identique a la Seance 3).
