@@ -370,19 +370,19 @@
      qui effacait le contraste de taille entre le grand et le petit
      element de chaque paire — l'enfant ne pouvait alors plus
      distinguer "le plus grand" a l'oeil. */
-  #carte-page2 [aria-label*="souris"] img {
+  #carte-page2 [aria-label*="الفأر"] img {
     height: clamp(90px, 15vw, 136px);
   }
 
-  #carte-page2 [aria-label*="éléphant"] img {
+  #carte-page2 [aria-label*="الفيل"] img {
     height: clamp(150px, 26vw, 220px);
   }
 
-  #carte-page2 [aria-label*="ballon de foot"] img {
+  #carte-page2 [aria-label*="كرة القدم"] img {
     height: clamp(140px, 25vw, 213px);
   }
 
-  #carte-page2 [aria-label*="balle de tennis"] img {
+  #carte-page2 [aria-label*="كرة التنس"] img {
     height: clamp(65px, 12vw, 99px);
   }
 
@@ -1449,10 +1449,10 @@
     /* Pages 2 et 3 : images (≈ -22 %), mêmes images, même ordre */
     .paire-comparaison { gap: 28px; margin: 0 0 18px; }
     .paire-comparaison:last-child { margin-bottom: 0; }
-    #carte-page2 [aria-label*="souris"] img { height: clamp(70px, 11.7vw, 106px); }
-    #carte-page2 [aria-label*="éléphant"] img { height: clamp(117px, 20.3vw, 172px); }
-    #carte-page2 [aria-label*="ballon de foot"] img { height: clamp(109px, 19.5vw, 166px); }
-    #carte-page2 [aria-label*="balle de tennis"] img { height: clamp(51px, 9.4vw, 77px); }
+    #carte-page2 [aria-label*="الفأر"] img { height: clamp(70px, 11.7vw, 106px); }
+    #carte-page2 [aria-label*="الفيل"] img { height: clamp(117px, 20.3vw, 172px); }
+    #carte-page2 [aria-label*="كرة القدم"] img { height: clamp(109px, 19.5vw, 166px); }
+    #carte-page2 [aria-label*="كرة التنس"] img { height: clamp(51px, 9.4vw, 77px); }
     #carte-page3 .item-comparaison img { height: clamp(74px, 10.1vw, 117px); }
 
     /* Page 4 : coloriage */
@@ -1634,6 +1634,16 @@
 html{background:linear-gradient(transparent,transparent);height:auto;min-height:0}
 body,body.page1-actif{min-height:0 !important;height:auto;padding-bottom:16px}
 body.page1-actif{align-items:flex-start}
+
+/* === En-tête de la page 1 : identique au Bouton 1 (logo, badge et position de la carte) === */
+@media (min-width: 641px) {
+  .logo-page1-flottant { top: 22px; inset-inline-start: 16px; }
+  .logo-page1-flottant .logo-img { height: 30px; }
+  .etiquette-page1-flottant { top: 22px; }
+  .etiquette-page1-flottant .etiquette { padding: 8px 24px; margin: 0; }
+  .etiquette-page1-flottant .etiquette-ar { font-size: 1.25rem; line-height: normal; font-weight: 700; color: #5C6B12; }
+  #carte-page1 { margin-top: 84px; }
+}
 </style>
 </head>
 <body class="page1-actif">
