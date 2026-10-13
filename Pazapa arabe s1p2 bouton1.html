@@ -476,12 +476,14 @@
   .bandeau-etiquette {
     display: inline-block;
     font-weight: 700;
-    font-size: 0.85rem;
-    color: #8A6300;
+    font-size: 24px;
+    color: #5C6B12;
     background: var(--pz-jaune-clair);
     padding: 4px 16px;
     border-radius: 999px;
     margin: 0 0 8px;
+    font-family: "Noto Naskh Arabic", "Noto Sans Arabic", Arial, Tahoma, serif;
+    line-height: 1.5;
   }
 
   .bandeau-etiquette-fr {
@@ -1508,7 +1510,8 @@
   .btn-reecouter {
     position: absolute;
     top: 50%;
-    inset-inline-end: -14px;
+    right: -14px;
+    left: auto;
     transform: translateY(-50%);
     width: 44px;
     height: 44px;
@@ -1542,10 +1545,16 @@
   }
   .btn-continuer[hidden] { display: none; }
   @media (max-width: 380px) {
-    .bulle-liste .bulle-ligne { padding-inline-end: 22px; }
+    .bulle-liste .bulle-ligne { padding-right: 22px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .btn-continuer { animation: none !important; }
+  }
+
+  /* Pas de demi-cercles décoratifs dans les coins de la carte (toutes les pages) */
+  .carte-objectifs::before,
+  .carte-objectifs::after {
+    display: none;
   }
 </style>
 </head>
