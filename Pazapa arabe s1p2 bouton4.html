@@ -1736,9 +1736,19 @@
 
   @media (min-width: 560px) {
     body.page1-actif main { max-width: 760px; }
-    #carte-garde .bloc-mascotte-accueil { display: flex; flex-direction: row; direction: rtl; align-items: center; justify-content: center; gap: 0; width: 100%; max-width: none; margin: 0 auto 4px; }
-    #carte-garde .mascotte-img { flex: 0 1 330px; width: 330px; max-width: 55%; }
-    #carte-garde .bloc-texte-accueil { position: static; transform: none; flex: 0 1 260px; width: auto; margin-top: -8px; }
+    #carte-garde .bloc-mascotte-accueil { display: flex; flex-direction: row; direction: rtl; align-items: center; justify-content: center; gap: 28px; width: 100%; max-width: none; margin: 0 auto 2px; }
+    #carte-garde .mascotte-img { flex: 0 0 300px; width: 300px; max-width: 55%; margin: -42px 0 -22px -86px; }
+    #carte-garde .bloc-texte-accueil { position: static; transform: none; flex: 0 1 250px; width: auto; margin-top: -14px; }
+  }
+
+  @media (min-width: 560px) {
+    #carte-garde { padding-bottom: 22px; }
+    #carte-garde h1 { margin: 14px 0 -4px; }
+    #carte-garde .bloc-mascotte-accueil { gap: 22px; margin-bottom: -18px; }
+    #carte-garde .bloc-texte-accueil { flex: 0 1 300px; margin-top: 14px; padding: 16px 22px; background: var(--pz-vert-clair); border-radius: 22px; }
+    #carte-garde .ligne-ar-message { font-size: 32px; line-height: 1.45; color: #5C6B12; }
+    #carte-garde .barre-navigation { margin-top: 6px; position: relative; z-index: 2; }
+    #carte-garde .mascotte-img { pointer-events: none; }
   }
 </style>
 
