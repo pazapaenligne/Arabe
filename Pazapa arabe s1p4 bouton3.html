@@ -1619,6 +1619,7 @@
   .s4-btn .ar { font-size: 17px; font-weight: 700; line-height: 1.3; }
   .s4-btn .fr { font-family: Arial, sans-serif; font-size: 13px; color: #6B6B69; }
   .s4-btn--petit { min-width: 96px; min-height: 44px; }
+  .s4-btn--actif { background: var(--pz-bleu-clair); border-color: var(--pz-bleu); border-width: 3px; }
   .s4-btn--principal { background: var(--pz-bleu); border-color: var(--pz-bleu); color: #fff; }
   .s4-btn--principal .fr { color: #EAFBFF; }
   .s4-btn:disabled { opacity: 0.45; cursor: default; }
@@ -2453,7 +2454,11 @@
     ["هَطَلَ", " "], ["الْمَطَرُ", " "], ["فَحَمَلَ", " "], ["مُحَمَّدٌ", " "], ["الْمِظَلَّةَ", "."]
   ];
   var fb3 = creerFeedback(3);
-  var a3 = { restants: 0, fini: false, pile: [] };
+  var a3 = { restants: 0, fini: false, gomme: false };
+  function majGomme() {
+    var g = document.getElementById("a3-effacer");
+    g.classList.toggle("s4-btn--actif", !!a3.gomme); g.setAttribute("aria-pressed", a3.gomme ? "true" : "false");
+  }
 
   // Coloriage réel : chaque mot possède sa propre zone (une toile sous le mot). Le geste (doigt, stylet, souris)
   // produit le coloriage ; un simple clic ne colorie pas le mot. Seuil de recouvrement volontairement bas.
@@ -2536,8 +2541,12 @@
     }
     toile.addEventListener("pointerdown", function (e) {
       if (!preparer()) { return; }
+      if (a3.gomme) {   // mode « أَمْسَحُ » : toucher un mot efface ce mot seulement
+        e.preventDefault();
+        if (aEncre) { ctrl.effacer(); a3.gomme = false; majGomme(); fb3.masquerTout(); majSuivant3(); }
+        return;
+      }
       e.preventDefault(); dessin = true; dernier = pos(e); aEncre = true;
-      var ip = a3.pile.indexOf(ctrl); if (ip >= 0) { a3.pile.splice(ip, 1); } a3.pile.push(ctrl);   // mot sur lequel l'élève travaille = le dernier touché
       if (tmr) { clearTimeout(tmr); tmr = null; } if (tmrNet) { clearTimeout(tmrNet); tmrNet = null; }
       try { toile.setPointerCapture(e.pointerId); } catch (x) {}
       ctx.fillStyle = "#F8B6CE"; ctx.beginPath(); ctx.arc(dernier.x, dernier.y, toile.height * 0.17, 0, 6.2832); ctx.fill();
@@ -2568,7 +2577,7 @@
   function demarrerA3() {
     var zone = document.getElementById("a3-texte");
     fb3.masquerTout();
-    a3.fini = false; a3.restants = 0; a3.pile = []; a3.tour = (a3.tour || 0) + 1;
+    a3.fini = false; a3.restants = 0; a3.gomme = false; majGomme(); a3.tour = (a3.tour || 0) + 1;
     document.getElementById("btn-suivant-a3").disabled = true;
     zone.innerHTML = "";
     TEXTE_A3.forEach(function (m) {
@@ -2588,15 +2597,10 @@
     });
   }
 
-  // « أَمْسَحُ » (coloriage) : efface seulement le mot en cours ; ce mot redevient « à faire »
+  // « أَمْسَحُ » (coloriage) : active la gomme ; toucher un mot efface ce mot seulement (il redevient « à faire »)
   document.getElementById("a3-effacer").addEventListener("click", function () {
     jouerSonBouton();
-    fb3.masquerTout();
-    // efface uniquement le mot en cours (le dernier mot touché) ; un second appui n'efface pas d'autre mot
-    var c = a3.pile.length ? a3.pile[a3.pile.length - 1] : null;
-    if (c && c.aEncre()) { c.effacer(); }
-    a3.pile = [];
-    majSuivant3();
+    a3.gomme = !a3.gomme; majGomme();   // active / désactive la gomme : ensuite, toucher UN mot (n'importe lequel) l'efface
   });
 
   var lancements = { 1: demarrerA1, 2: demarrerA2, 3: demarrerA3 };
