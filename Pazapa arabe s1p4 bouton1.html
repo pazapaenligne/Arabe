@@ -2206,9 +2206,32 @@
         retirerSecours();
       });
 
-      // En passant à l'écran suivant, l'introduction s'arrête et ne reprend pas.
+      // planifierLancer : attend que la page 1 soit prête et visible,
+      // puis déclenche un délai de 1 500 ms avant de lancer l'audio.
+      // Un seul délai peut être actif à la fois.
+      var delaiBienvenue = null;
+
+      function planifierLancer() {
+        if (delaiBienvenue !== null) { return; } // délai déjà en cours
+        if (lance || termine) { return; }        // audio déjà lancé ou terminé
+        if (document.hidden) { return; }         // onglet non visible
+        if (pageAccueilAudio && pageAccueilAudio.hidden) { return; } // page 1 non active
+        delaiBienvenue = window.setTimeout(function () {
+          delaiBienvenue = null;
+          if (!lance && !termine && !document.hidden &&
+              !(pageAccueilAudio && pageAccueilAudio.hidden)) {
+            lancer();
+          }
+        }, 1500);
+      }
+
+      // En passant à l'écran suivant : le délai est annulé et l'introduction s'arrête.
       if (btnSuivantAccueil) {
         btnSuivantAccueil.addEventListener("click", function () {
+          if (delaiBienvenue !== null) {
+            window.clearTimeout(delaiBienvenue);
+            delaiBienvenue = null;
+          }
           termine = true;
           retirerSecours();
           audioIntro.pause();
@@ -2216,17 +2239,17 @@
         });
       }
 
-      // Tentative de lecture automatique dès que la page est prête.
-      lancer();
+      // Tentative de lecture automatique : 1 500 ms après que la page est prête et visible.
+      planifierLancer();
 
-      // Nouvelles tentatives automatiques (sans action de l'enfant) si la 1re a été
-      // refusée trop tôt : fin de chargement, audio prêt, page rendue visible.
-      // « lancer() » ne fait rien si l'audio joue déjà ou a déjà été joué : jamais deux fois.
-      audioIntro.addEventListener("canplaythrough", lancer);
-      window.addEventListener("load", lancer);
-      window.addEventListener("pageshow", lancer);
+      // Nouvelles tentatives si la 1re a été refusée trop tôt :
+      // fin de chargement, audio prêt, page rendue visible.
+      // Respectent le délai si celui-ci n'a pas encore commencé.
+      audioIntro.addEventListener("canplaythrough", planifierLancer);
+      window.addEventListener("load", planifierLancer);
+      window.addEventListener("pageshow", planifierLancer);
       document.addEventListener("visibilitychange", function () {
-        if (!document.hidden) { lancer(); }
+        if (!document.hidden) { planifierLancer(); }
       });
     })();
   </script>
