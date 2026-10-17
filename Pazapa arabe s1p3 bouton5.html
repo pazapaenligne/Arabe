@@ -1555,6 +1555,16 @@
      Ajout scope a #carte-fin, sans toucher au reste de la charte.
      =================================================================== */
   #carte-fin { position: relative; }
+  #carte-b5-q1, #carte-b5-q2, #carte-b5-q3, #carte-b5-q4, #carte-b5-q5, #carte-b5-q6 { position: relative; }
+  #b5-confetti-layer-mini {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 100%;
+    max-height: 220px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 3;
+  }
   #b5-confetti-layer {
     position: absolute;
     top: 0; left: 0; right: 0;
@@ -1579,7 +1589,7 @@
     to { transform: translateY(230px) rotate(300deg); opacity: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
-    #b5-confetti-layer { display: none; }
+    #b5-confetti-layer, #b5-confetti-layer-mini { display: none; }
   }
 
   /* ===================================================================
@@ -1948,6 +1958,42 @@
   }
 
   // ===================================================================
+  // Mini-confettis (Bouton 5) : declenches apres chaque bonne reponse,
+  // directement sur la carte de la question en cours. Reutilise les
+  // memes couleurs/animation que les confettis de fin ; duree plus
+  // courte (~1 a 1.5s) et moins de particules. Respecte
+  // prefers-reduced-motion et ne declenche jamais deux animations en
+  // meme temps (une seule couche reutilisee et videe avant chaque
+  // nouvelle salve).
+  // ===================================================================
+  function jouerConfettisMini(carteId) {
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) { return; }
+    var carte = document.getElementById(carteId);
+    if (!carte) { return; }
+    var couche = document.getElementById("b5-confetti-layer-mini");
+    if (!couche) {
+      couche = document.createElement("div");
+      couche.id = "b5-confetti-layer-mini";
+      couche.setAttribute("aria-hidden", "true");
+    }
+    if (couche.parentNode !== carte) {
+      carte.insertBefore(couche, carte.firstChild);
+    }
+    couche.innerHTML = "";
+    var total = 12;
+    for (var i = 0; i < total; i++) {
+      var p = document.createElement("span");
+      p.className = "b5-confetti";
+      p.style.left = (Math.random() * 94 + 3) + "%";
+      p.style.background = COULEURS_CONFETTIS[i % COULEURS_CONFETTIS.length];
+      p.style.animationDuration = (0.9 + Math.random() * 0.4) + "s";
+      p.style.animationDelay = (Math.random() * 0.15) + "s";
+      couche.appendChild(p);
+    }
+    setTimeout(function () { couche.innerHTML = ""; }, 1400);
+  }
+
+  // ===================================================================
   // Ordre des pages du Bouton 5 (test des connaissances, 6 questions max,
   // une action par question, navigation Précédent/Suivant, un seul
   // Suivant valide par clic, page finale unique).
@@ -2046,6 +2092,7 @@
           boutons.forEach(function (b) { b.disabled = true; });
           remplirDots(true);
           if (btnSuiv) { btnSuiv.disabled = false; }
+          jouerConfettisMini("carte-b5-" + q.id);
         } else {
           afficherErreur();
           btn.classList.add(q.incorrecte);
