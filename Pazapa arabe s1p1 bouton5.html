@@ -1970,6 +1970,38 @@
     margin: 0 0 8px;
   }
 
+  /* ===================================================================
+     Confettis de felicitation (Bouton 5). Identique au modele deja
+     valide dans les Seances 2, 3 et 4.
+     =================================================================== */
+  #carte-fin { position: relative; }
+  #b5-confetti-layer {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 100%;
+    max-height: 260px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .b5-confetti {
+    position: absolute;
+    top: -12px;
+    width: 8px;
+    height: 14px;
+    border-radius: 2px;
+    opacity: 0.95;
+    animation-name: b5-confetti-chute;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+  }
+  @keyframes b5-confetti-chute {
+    to { transform: translateY(230px) rotate(300deg); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #b5-confetti-layer { display: none; }
+  }
+
 </style>
 </head>
 <body>
@@ -2478,6 +2510,37 @@
     } catch (e) {
       if (alaFin) { alaFin(); }
     }
+  }
+
+  // ===================================================================
+  // Confettis de felicitation finale (Bouton 5 uniquement). Identique
+  // au modele (Seances 2, 3, 4) : ~2 secondes, une seule fois par
+  // arrivee sur la page de fin.
+  // ===================================================================
+  var COULEURS_CONFETTIS = ["#36BBD6", "#C9D646", "#FCC104", "#E6352B"];
+  function jouerConfettis() {
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) { return; }
+    var carte = document.getElementById("carte-fin");
+    if (!carte) { return; }
+    var couche = document.getElementById("b5-confetti-layer");
+    if (!couche) {
+      couche = document.createElement("div");
+      couche.id = "b5-confetti-layer";
+      couche.setAttribute("aria-hidden", "true");
+      carte.insertBefore(couche, carte.firstChild);
+    }
+    couche.innerHTML = "";
+    var total = 22;
+    for (var i = 0; i < total; i++) {
+      var p = document.createElement("span");
+      p.className = "b5-confetti";
+      p.style.left = (Math.random() * 94 + 3) + "%";
+      p.style.background = COULEURS_CONFETTIS[i % COULEURS_CONFETTIS.length];
+      p.style.animationDuration = (1.6 + Math.random() * 0.5) + "s";
+      p.style.animationDelay = (Math.random() * 0.3) + "s";
+      couche.appendChild(p);
+    }
+    setTimeout(function () { couche.innerHTML = ""; }, 2200);
   }
   document.querySelectorAll("[data-audio]").forEach(function (btn) {
     btn.addEventListener("click", function () {
@@ -3134,6 +3197,7 @@
     (redessinateurs || []).forEach(function (f) { try { f(); } catch (e) {} });
     if (idPage === "carte-fin") {
       jouerAudioUnique(AUDIO_BULLE_FIN);
+      jouerConfettis();
     }
   }
 
