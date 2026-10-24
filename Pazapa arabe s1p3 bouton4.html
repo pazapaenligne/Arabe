@@ -1890,6 +1890,78 @@
   .bm-t2 .bm-slot--off { display: none; }
   .bm-etiq { font-family: "Noto Sans Arabic", Arial, Tahoma, sans-serif; font-size: 36px; font-weight: 700; line-height: 1.3; color: var(--pz-rouge); direction: rtl; unicode-bidi: isolate; }
   @media (prefers-reduced-motion: reduce) { .ch-fanions.ch-nouv .ch-cell { animation: none !important; } }
+
+  /* ===================================================================
+     MOODLE / IFRAME : écrans de jeu compacts (S1 / L3)
+     Uniquement tailles et espacements : contenu, logique, audios, images et charte inchangés.
+     Le contenu fixe la hauteur ; aucun défilement interne ; zones tactiles >= 44 px.
+     ================================================================= */
+  body { padding: 6px; }
+  :is(#carte-jeu1, #carte-jeu2, #carte-jeu3) { padding: 8px 18px 12px; }
+  /* En-tête : logo + semaine/leçon sur UNE ligne */
+  :is(#carte-jeu1, #carte-jeu2, #carte-jeu3) .entete-compact { flex-direction: row; flex-wrap: nowrap; gap: 16px; margin: 0 0 6px; padding: 5px 16px; }
+  :is(#carte-jeu1, #carte-jeu2, #carte-jeu3) .logo-img { height: 34px; }
+  :is(#carte-jeu1, #carte-jeu2, #carte-jeu3) .etiquette { padding: 2px 16px; }
+  :is(#carte-jeu1, #carte-jeu2, #carte-jeu3) .etiquette-ar { font-size: 21px; line-height: 1.45; }
+  /* Consigne + audio juste sous l'en-tête */
+  :is(#carte-jeu1, #carte-jeu2, #carte-jeu3) .ligne-bilingue { margin: 2px 0 4px; }
+  :is(#carte-jeu1, #carte-jeu2, #carte-jeu3) .ligne-ar { line-height: 1.45; }
+  :is(#carte-jeu1, #carte-jeu2, #carte-jeu3) .b3-texte-audio { padding: 2px 0; }
+  :is(#carte-jeu1, #carte-jeu2, #carte-jeu3) .badge-audio-inline { width: 40px; height: 40px; }
+  :is(#carte-jeu1, #carte-jeu2, #carte-jeu3) .badge-audio-icone { width: 18px; height: 18px; }
+  .pz-prog { margin: 4px auto 0; min-height: 12px; }
+  /* Feedback : même emplacement pour les deux messages, hauteur réduite */
+  .jm-feedback { margin-top: 6px; min-height: 46px; }
+  .jm-feedback .message-feedback-activite { margin: 0 auto; padding: 2px 18px; }
+  .jm-feedback .message-feedback-activite .message-feedback-ar { font-size: 24px; line-height: 1.35; }
+  :is(#carte-jeu1, #carte-jeu2, #carte-jeu3) .barre-navigation { margin-top: 6px; gap: 8px; }
+  :is(#carte-jeu1, #carte-jeu2, #carte-jeu3) .bouton-nav { padding: 4px 14px; }
+
+  /* Jeu 1 : jardin + collection */
+  .ch-jardin { margin-top: 6px; padding: 16px 12px 46px; }
+  .ch-herbe { height: 38px; }
+  .ch-fanions { row-gap: 12px; }
+  .ch-fanion { min-height: 78px; padding: 12px 4px 22px; }
+  .ch-collection { margin-top: 8px; row-gap: 4px; padding-top: 0; }
+  .ch-slot { min-height: 50px; margin-top: 8px; padding: 8px 2px 12px; }
+  @media (min-width: 560px) {
+    .ch-fanions.ch-n4 { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: none; column-gap: 4px; }
+  }
+
+  /* Jeu 2 : chemin plus serré (galets >= 44 px) */
+  .cm-ecoute { margin: 0; }
+  .cm-ecouter { width: 48px; height: 48px; }
+  .cm-chemin { margin-top: 4px; padding: 56px 12px 10px; gap: 14px; }
+  .cm-rang::before { top: -5px; bottom: -5px; }
+  .cm-rang::after, .cm-but::after { bottom: -14px; height: 14px; }
+  .cm-depart { margin-top: 24px; }
+  .cm-pierre, .cm-pierre-fixe { min-height: 44px; padding-top: 4px; }
+  .cm-pierre:nth-child(2) { margin-top: 4px; }
+  .cm-mot { line-height: 1.35; }
+  .cm-paz { width: 38px; }
+  .cm-pierre-fixe { min-height: 44px; }
+  .cm-but .cm-pierre-fixe { min-height: 48px; }
+  .cm-depart .cm-pierre-fixe { min-height: 34px; }
+
+  /* Jeu 3 : pièces + boîte */
+  .bm-pieces { gap: 8px 8px; min-height: 104px; margin-top: 4px; }
+  .bm-piece { height: 50px; }
+  .bm-slot .bm-piece { width: 62px; height: 44px; font-size: 27px; }
+  .bm-haut { height: 26px; }
+  .bm-tiroirs { padding: 8px; }
+  .bm-tiroir { min-height: 112px; padding: 6px 4px; gap: 6px; }
+  .bm-slot { width: 66px; height: 46px; }
+  .bm-t2 .bm-slot { height: 52px; }
+  .bm-etiq { font-size: 32px; line-height: 1.25; }
+  @media (max-width: 600px) {
+    :is(#carte-jeu1, #carte-jeu2, #carte-jeu3) { padding: 6px 10px 10px; }
+    :is(#carte-jeu1, #carte-jeu2, #carte-jeu3) .logo-img { height: 30px; }
+    :is(#carte-jeu1, #carte-jeu2, #carte-jeu3) .etiquette-ar { font-size: 18px; }
+    :is(#carte-jeu1, #carte-jeu2, #carte-jeu3) .ligne-ar { font-size: 25px; }
+    .jm-feedback .message-feedback-activite .message-feedback-ar { font-size: 22px; }
+    .ch-fanion { min-height: 72px; }
+    .bm-tiroir { min-height: 106px; }
+  }
 </style>
 
 <body class="page1-actif">
