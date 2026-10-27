@@ -2637,6 +2637,7 @@
   // ---- Navigation interne ----
   var chainePages = ["carte-garde", "carte-jeu1", "carte-jeu2", "carte-jeu3", "carte-fin"];
   function afficherPage(idPage) {
+    arreterAudioActif();
     chainePages.forEach(function (id) {
       var carte = document.getElementById(id);
       if (!carte) { return; }
@@ -2644,14 +2645,42 @@
     });
     document.body.classList.toggle("page1-actif", idPage === "carte-garde");
     window.scrollTo({ top: 0, behavior: "smooth" });
-    if (idPage === "carte-garde") { jouerAudioAccueil(); }
+    if (idPage === "carte-garde") { jouerAccueil(); }
   }
   // Audio automatique du titre "هَيَّا نَلْعَبْ" : se declenche a chaque fois
   // que l'enfant se trouve sur la page d'accueil (arrivee initiale comprise
   // ci-dessous, et tout retour ulterieur via afficherPage()).
-  function jouerAudioAccueil() {
-    var titre = document.querySelector(".titre-ar[data-audio]");
-    if (titre) { jouerAudioUnique(titre.getAttribute("data-audio")); }
+  var accueilToken = 0;
+  function jouerAccueil() {
+    var carte = document.getElementById("carte-garde");
+    var titre = carte && carte.querySelector(".titre-ar[data-audio]");
+    var src = titre && titre.getAttribute("data-audio");
+    if (!src) { return; }
+    var token = ++accueilToken;
+    function surCarteGarde() { return !carte.classList.contains("page-masquee"); }
+    function lancer() {
+      if (token !== accueilToken || !surCarteGarde()) { return; }
+      arreterAudioActif();
+      try {
+        var a = new Audio(src);
+        audioActif = a;
+        a.addEventListener("ended", function () { if (audioActif === a) { audioActif = null; } });
+        var p = a.play();
+        if (p && p.catch) { p.catch(function () { if (audioActif === a) { audioActif = null; } armer(); }); }
+      } catch (e) {}
+    }
+    function armer() {
+      function geste(ev) {
+        document.removeEventListener("pointerdown", geste, true);
+        document.removeEventListener("keydown", geste, true);
+        if (token !== accueilToken) { return; }
+        var cible = ev.target && ev.target.closest ? ev.target.closest("#btn-demarrer") : null;
+        if (!cible) { lancer(); }
+      }
+      document.addEventListener("pointerdown", geste, true);
+      document.addEventListener("keydown", geste, true);
+    }
+    setTimeout(lancer, 2000);
   }
   // Bouton "C'est parti !" : lance l'audio (un seul audio à la fois) et ouvre le Jeu 1
   // uniquement à la FIN RÉELLE de cet audio (événement "ended"), avec repli si l'audio
